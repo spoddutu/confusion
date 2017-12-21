@@ -1,0 +1,37 @@
+<ion-header>
+    
+      <ion-navbar color="primary">
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>My Favorites</ion-title>
+      </ion-navbar>
+    
+    </ion-header>
+    
+    
+    <ion-content>
+    
+      <div *ngIf="favourites">
+        <ion-list>
+          <ion-item-sliding *ngFor="let favourite of favourites" #item>
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src="{{baseUrl + favourite.image}}" />
+            </ion-thumbnail>
+            <h3>{{ favourite.name }}</h3>
+            <p>{{ favourite.description }}</p>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button color="danger" (click)="deleteFavourite(item, favourite.id)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </div>
+      <div [hidden]="favourites">
+        <ion-spinner></ion-spinner>
+        <h4>Loading . . . Please Wait</h4>
+      </div>
+    </ion-content>
