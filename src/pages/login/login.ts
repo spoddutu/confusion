@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Storage } from '@ionic/storage';
+
+import { RegisterPage } from '../register/register';
 
 import { User } from '../../shared/user.model';
 
@@ -15,7 +17,8 @@ export class LoginPage {
   user: User = { username: '', password: ''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private formBuilder: FormBuilder, private storage: Storage, private viewCtrl: ViewController) {
+    private formBuilder: FormBuilder, private storage: Storage, private viewCtrl: ViewController,
+    private modal: ModalController) {
       this.storage.get('user').then(user => {
         if(user) {
           this.user = user;
@@ -53,6 +56,12 @@ export class LoginPage {
       this.storage.remove('user');
     }
     this.viewCtrl.dismiss();
+  }
+
+  openRegister() {
+    let registerModal = this.modal.create(RegisterPage);
+    registerModal.present();
+    registerModal.onDidDismiss(() => this.dismiss());
   }
 
 }

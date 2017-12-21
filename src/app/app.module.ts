@@ -5,6 +5,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { LocalNotifications } from '@ionic-native/local-notifications'
 import { EmailComposer } from '@ionic-native/email-composer';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -14,6 +16,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { FavouritesPage } from '../pages/favourites/favourites';
 import { ReservationPage } from '../pages/reservation/reservation';
 import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
 import { DishdetailPage } from '../pages/dishdetail/dishdetail';
 import { CommentPage } from '../pages/comment/comment';
 
@@ -36,6 +39,7 @@ import { FavouriteProvider } from '../providers/favourite/favourite';
     FavouritesPage,
     ReservationPage,
     LoginPage,
+    RegisterPage,
     DishdetailPage,
     CommentPage
   ],
@@ -55,6 +59,7 @@ import { FavouriteProvider } from '../providers/favourite/favourite';
     FavouritesPage,
     ReservationPage,
     LoginPage,
+    RegisterPage,
     DishdetailPage,
     CommentPage
   ],
@@ -68,7 +73,9 @@ import { FavouriteProvider } from '../providers/favourite/favourite';
     { provide: 'BaseURL', useValue: baseURL},
     FavouriteProvider,
     LocalNotifications,
-    EmailComposer
+    EmailComposer,
+    SocialSharing,
+    Camera
   ]
 })
 export class AppModule {}

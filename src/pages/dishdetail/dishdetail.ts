@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, ActionSheetController, ModalController } from 'ionic-angular';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { CommentPage } from '../comment/comment';
 
@@ -20,7 +21,8 @@ export class DishdetailPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, @Inject('BaseURL') private baseUrl,
     private favouriteProvider: FavouriteProvider, private toastCtrl: ToastController,
-    private actionsheetCtrl: ActionSheetController, private modalCtrl: ModalController) {
+    private actionsheetCtrl: ActionSheetController, private modalCtrl: ModalController,
+    private socialSharing: SocialSharing) {
   }
 
   ionViewDidLoad() {
@@ -64,6 +66,30 @@ export class DishdetailPage {
             });
 
             commentModal.present();
+          }
+        },
+        {
+          text: 'Share via Facebook',
+          handler: () => {
+            this.socialSharing.shareViaFacebook(this.dish.name + ' -- ' + this.dish.description, this.baseUrl + this.dish.image, '')
+              .then(() => console.log('Posted successfully to Facebook'))
+              .catch(() => console.log('Failed to post to Facebook'));
+          }
+        },
+        {
+          text: 'Share via Twitter',
+          handler: () => {
+            this.socialSharing.shareViaTwitter(this.dish.name + ' -- ' + this.dish.description, this.baseUrl + this.dish.image, '')
+              .then(() => console.log('Posted successfully to Twitter'))
+              .catch(() => console.log('Failed to post to Twitter'));
+          }
+        },
+        {
+          text: 'Share via WhatsApp',
+          handler: () => {
+            this.socialSharing.shareViaWhatsApp(this.dish.name + ' -- ' + this.dish.description, this.baseUrl + this.dish.image, '')
+              .then(() => console.log('Posted successfully to WhatsApp'))
+              .catch(() => console.log('Failed to post to WhatsApp'));
           }
         },
         {
